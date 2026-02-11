@@ -1,28 +1,28 @@
-# 🚗 RCVE - Roadside Compliance Verification Engine
+# RCVE - Roadside Compliance Verification Engine
 
 A smart, AI-powered system for verifying vehicle documents and driving licenses. It helps **Citizens** manage their documents and **Police** verify them instantly using AI and QR codes.
 
-## 🌟 Features
+## Features
 
-### 👤 Citizen Portal
+### Citizen Portal
 *   **Upload & Analyze:** Upload photos of your **Driving License (DL)**, **Registration Certificate (RC)**, **Insurance**, and **PUC**.
 *   **AI Extraction:** The system automatically reads details (Name, Reg No, Expiry Date) from the image.
 *   **Digital Wallet:** Save your verified documents as digital cards.
 *   **Generate Token:** Get a unique **QR Token** for each document to show to the police.
 
-### 👮 Police Portal
+### Police Portal
 *   **Instant Verification:** Scan a citizen's token to see their document details.
 *   **AI Validation:** The system checks if the document is **Valid**, **Expired**, or **Suspicious**.
 *   **Visual Check:** View the original uploaded image to compare with the physical document.
 
-### 🛡️ Admin Portal
+### Admin Portal
 *   **User Management:** View all registered users and their stats.
 *   **System Oversight:** Check uploaded documents and vehicles.
 *   **Control:** Remove users or flagged content.
 
 ---
 
-## 🏗️ Architecture (Simplified)
+## Architecture (Simplified)
 
 Think of RCVE as a smart digital filing cabinet with a built-in expert.
 
@@ -41,11 +41,11 @@ Think of RCVE as a smart digital filing cabinet with a built-in expert.
 4.  **The Verification (Police Check):**
     *   When a Police officer enters the **Secret Code**, the app fetches the details from the locker.
     *   The officer sees:
-        *   ✅ **Status:** Valid / Expired
-        *   📄 **Details:** Name, Vehicle Model, etc.
-        *   🖼️ **Proof:** The original photo uploaded by the user.
+        *   **Status:** Valid / Expired
+        *   **Details:** Name, Vehicle Model, etc.
+        *   **Proof:** The original photo uploaded by the user.
 
-### 🛠️ Tech Stack
+### Tech Stack
 *   **Frontend:** Next.js (React), Tailwind CSS, ShadCN UI
 *   **Backend:** Next.js API Routes
 *   **Database:** SQLite (with Prisma ORM)
@@ -54,7 +54,7 @@ Think of RCVE as a smart digital filing cabinet with a built-in expert.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 *   Node.js installed
@@ -93,10 +93,10 @@ Think of RCVE as a smart digital filing cabinet with a built-in expert.
     ```
     Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 🔐 Credentials
+## Credentials
 *   **Admin Login:** `admin@2003` / `admin@2003`
 *   **Police Login:** Create any account with the "Police" role (or use signup flow if enabled).
 *   **Citizen Login:** Sign up as a new user.
 
 ---
-**Built for the Future of Traffic Compliance.** 🚦
+**Built for the Future of Traffic Compliance.**
