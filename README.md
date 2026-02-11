@@ -94,7 +94,7 @@ Think of RCVE as a smart digital filing cabinet with a built-in expert.
     Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Credentials
-*   **Admin Login:** `admin@2003` / `admin@2003`
+*   **Admin Login:** (Check `src/auth.ts` or ask administrator)
 *   **Police Login:** Create any account with the "Police" role (or use signup flow if enabled).
 *   **Citizen Login:** Sign up as a new user.
 
