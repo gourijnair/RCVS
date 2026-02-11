@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 RCVE - Roadside Compliance Verification Engine
 
-## Getting Started
+A smart, AI-powered system for verifying vehicle documents and driving licenses. It helps **Citizens** manage their documents and **Police** verify them instantly using AI and QR codes.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 👤 Citizen Portal
+*   **Upload & Analyze:** Upload photos of your **Driving License (DL)**, **Registration Certificate (RC)**, **Insurance**, and **PUC**.
+*   **AI Extraction:** The system automatically reads details (Name, Reg No, Expiry Date) from the image.
+*   **Digital Wallet:** Save your verified documents as digital cards.
+*   **Generate Token:** Get a unique **QR Token** for each document to show to the police.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 👮 Police Portal
+*   **Instant Verification:** Scan a citizen's token to see their document details.
+*   **AI Validation:** The system checks if the document is **Valid**, **Expired**, or **Suspicious**.
+*   **Visual Check:** View the original uploaded image to compare with the physical document.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🛡️ Admin Portal
+*   **User Management:** View all registered users and their stats.
+*   **System Oversight:** Check uploaded documents and vehicles.
+*   **Control:** Remove users or flagged content.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ Architecture (Simplified)
 
-To learn more about Next.js, take a look at the following resources:
+Think of RCVE as a smart digital filing cabinet with a built-in expert.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **The Input (Upload):**
+    *   A user takes a photo of their document (like a Driving License) and uploads it to the app.
+    
+2.  **The Brain (AI Analysis):**
+    *   The app sends this photo to **Google Gemini** (a powerful AI).
+    *   Gemini looks at the photo and says: *"This is a Driving License. The number is DL-12345. It expires on 2030-01-01."*
+    *   It also checks for issues: *"wait, this image looks blurry"* or *"this document is expired!"*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **The Storage (Database):**
+    *   The app saves these details and the photo safely in a database (like a secure digital locker).
+    *   It gives the document a unique **Secret Code (Token)**.
 
-## Deploy on Vercel
+4.  **The Verification (Police Check):**
+    *   When a Police officer enters the **Secret Code**, the app fetches the details from the locker.
+    *   The officer sees:
+        *   ✅ **Status:** Valid / Expired
+        *   📄 **Details:** Name, Vehicle Model, etc.
+        *   🖼️ **Proof:** The original photo uploaded by the user.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🛠️ Tech Stack
+*   **Frontend:** Next.js (React), Tailwind CSS, ShadCN UI
+*   **Backend:** Next.js API Routes
+*   **Database:** SQLite (with Prisma ORM)
+*   **AI Model:** Google Gemini Flash
+*   **Auth:** NextAuth.js
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+*   Node.js installed
+*   A Google Gemini API Key
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/gourijnair/RCVS.git
+    cd rcve-app
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Set up Environment Variables:**
+    Create a `.env` file in the root directory and add:
+    ```env
+    DATABASE_URL="file:./dev.db"
+    NEXTAUTH_SECRET="your-secret-key"
+    GEMINI_API_KEY="your-gemini-api-key"
+    ```
+
+4.  **Initialize Database:**
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
+
+5.  **Run the App:**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🔐 Credentials
+*   **Admin Login:** `admin@2003` / `admin@2003`
+*   **Police Login:** Create any account with the "Police" role (or use signup flow if enabled).
+*   **Citizen Login:** Sign up as a new user.
+
+---
+**Built for the Future of Traffic Compliance.** 🚦
