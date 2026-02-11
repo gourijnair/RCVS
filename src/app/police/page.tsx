@@ -97,6 +97,15 @@ export default function PoliceDashboard() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-6">
+                            {report.imageUrl && (
+                                <div className="mb-6">
+                                    <p className="text-sm text-zinc-500 uppercase tracking-wider mb-2">Scanned Document</p>
+                                    <div className="bg-zinc-900 p-2 rounded-lg inline-block">
+                                        <img src={report.imageUrl} alt="Verified Document" className="max-h-64 rounded border border-zinc-700" />
+                                    </div>
+                                </div>
+                            )}
+
                             <div className="grid grid-cols-2 gap-6 p-4 bg-zinc-900 rounded-lg">
                                 <div>
                                     <p className="text-sm text-zinc-500 uppercase tracking-wider mb-1">Vehicle Owner</p>

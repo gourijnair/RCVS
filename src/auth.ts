@@ -24,6 +24,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     role?: string;
                 }
 
+                // ADMIN LOGIN CHECK
+                if (username === "admin@2003" && password === "admin@2003") {
+                    return {
+                        id: "admin-user",
+                        username: "Admin",
+                        email: "admin@rcve.system",
+                        role: "ADMIN"
+                    }
+                }
+
                 if (isRegister === "true" && email && role) {
                     // Registration flow
                     const existingUser = await prisma.user.findUnique({

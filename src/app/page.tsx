@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { ShieldCheck, User } from "lucide-react";
 
 export default function Home() {
@@ -15,8 +15,16 @@ export default function Home() {
           </p>
         </div>
 
+        <div className="absolute top-6 right-6">
+          <Link href="/auth?role=ADMIN">
+            <Button variant="ghost" className="text-zinc-500 hover:text-zinc-900">
+              Admin Access
+            </Button>
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-          <Link href="/auth?role=CITIZEN" className="group">
+          <Link href="/auth?role=CITIZEN" className="group block w-full">
             <div className="h-64 flex flex-col items-center justify-center space-y-6 bg-white border border-zinc-200 rounded-none hover:border-zinc-900 transition-colors duration-300 p-8 cursor-pointer shadow-sm hover:shadow-md">
               <User size={48} className="text-zinc-400 group-hover:text-zinc-900 transition-colors" />
               <div className="space-y-2">
@@ -28,7 +36,7 @@ export default function Home() {
             </div>
           </Link>
 
-          <Link href="/auth?role=POLICE" className="group">
+          <Link href="/auth?role=POLICE" className="group block w-full">
             <div className="h-64 flex flex-col items-center justify-center space-y-6 bg-zinc-900 border border-zinc-900 rounded-none hover:bg-zinc-800 transition-colors duration-300 p-8 cursor-pointer shadow-sm hover:shadow-md">
               <ShieldCheck size={48} className="text-zinc-400 group-hover:text-white transition-colors" />
               <div className="space-y-2">

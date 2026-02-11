@@ -37,11 +37,17 @@ export default function AuthPage() {
         if (res?.error) {
             setError("Invalid credentials")
         } else {
-            router.push(loginUser.startsWith("officer") ? "/police" : "/citizen")
-            // Ideally redirect based on role from session, but for quick UX:
-            // We will let the middleware or the page itself handle redirect if wrong role.
-            // Actually handling it here based on convention or fetching session is better.
-            // For now, simple redirect.
+            // Fetch session to check role
+            const sessionRes = await fetch("/api/auth/session")
+            const sessionData = await sessionRes.json()
+
+            if (sessionData?.user?.role === "POLICE") {
+                router.push("/police")
+            } else if (sessionData?.user?.role === "ADMIN") {
+                router.push("/admin")
+            } else {
+                router.push("/citizen")
+            }
             router.refresh()
         }
     }
@@ -68,7 +74,10 @@ export default function AuthPage() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 relative">
+            <Button variant="ghost" className="absolute top-4 left-4 z-50" onClick={() => router.push("/")}>
+                ← Back to Home
+            </Button>
             <Card className="w-[400px]">
                 <CardHeader>
                     <CardTitle>Welcome to RCVE</CardTitle>

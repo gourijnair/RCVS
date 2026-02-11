@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Car, FileText, Plus, Loader2, CheckCircle } from "lucide-react";
+import { Car, FileText, Plus, Loader2, CheckCircle, Copy } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { QRCodeSVG } from "qrcode.react";
 
@@ -367,8 +367,22 @@ export default function CitizenDashboard() {
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-xs text-gray-500 font-mono">Token</p>
-                                    <p className="text-sm font-mono font-bold">{dlDocument.token?.slice(0, 12)}...</p>
+                                    <div className="mb-2">
+                                        <p className="text-xs text-gray-500">DL Number</p>
+                                        <p className="font-bold">{(() => {
+                                            try { return JSON.parse(dlDocument.analysisResult).regNumber || "N/A"; }
+                                            catch (e) { return "N/A"; }
+                                        })()}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gray-500 font-mono mb-1">Token</p>
+                                        <div className="flex items-center gap-1 justify-end">
+                                            <code className="text-sm font-mono font-bold bg-white px-1 rounded border">{dlDocument.token?.slice(0, 8)}...</code>
+                                            <Button size="icon" variant="ghost" className="h-6 w-6" onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(dlDocument.token || "") }}>
+                                                <Copy size={12} />
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         ) : (
@@ -490,7 +504,12 @@ export default function CitizenDashboard() {
                                                 <div className="flex justify-between items-center group mb-2">
                                                     <div className="flex flex-col">
                                                         <span className="text-xs opacity-70">Token</span>
-                                                        <code className="text-xs font-mono font-bold bg-gray-100 p-1 rounded">{v.token.slice(0, 8)}...</code>
+                                                        <div className="flex items-center gap-1">
+                                                            <code className="text-xs font-mono font-bold bg-gray-100 p-1 rounded">{v.token.slice(0, 8)}...</code>
+                                                            <Button size="icon" variant="ghost" className="h-5 w-5" onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(v.token || "") }}>
+                                                                <Copy size={10} />
+                                                            </Button>
+                                                        </div>
                                                     </div>
                                                     <div className="bg-white p-1 rounded">
                                                         <QRCodeSVG value={JSON.stringify({ type: "VEHICLE", token: v.token })} size={48} />
