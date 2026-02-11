@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  username  String    @unique
+  email     String    @unique
+  password  String
+  role      String    @default("CITIZEN") // "CITIZEN" or "POLICE"
+  vehicles  Vehicle[]
+  documents Document[] @relation("UserDocuments")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Vehicle {
+  id        String     @id @default(cuid())
+  ownerId   String
+  owner     User       @relation(fields: [ownerId], references: [id])
+  regNumber String     @unique
+  model     String
+  type      String
+  token     String?    @unique // Token for QR code
+  documents Document[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Document {
+  id             String   @id @default(cuid())
+  userId         String?
+  user           User?    @relation("UserDocuments", fields: [userId], references: [id])
+  vehicleId      String?
+  vehicle        Vehicle? @relation(fields: [vehicleId], references: [id])
+  type           String
+  imageUrl       String // Storing base64 for MVP simplicity
+  analysisResult String // JSON string of the analysis
+  status         String   @default("PENDING") // PENDING, VALID, EXPIRED, MISSING, SUSPICIOUS
+  token          String?  @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
